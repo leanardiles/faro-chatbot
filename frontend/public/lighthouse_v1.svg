@@ -1,0 +1,50 @@
+<svg viewBox="150 280 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Faro lighthouse">
+  <title>Faro lighthouse</title>
+
+  <ellipse cx="340" cy="655" rx="175" ry="18" fill="#4A3728" opacity="0.2"/>
+  <path d="M 175 650 Q 170 605 200 585 Q 230 560 280 555 Q 320 540 360 548 Q 410 540 450 558 Q 490 570 510 600 Q 515 635 505 655 Z" fill="#8B6B4F" stroke="#3D2817" stroke-width="4"/>
+  <path d="M 220 605 Q 240 598 260 604" stroke="#3D2817" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 420 595 Q 440 590 460 596" stroke="#3D2817" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 300 635 Q 315 630 330 634" stroke="#3D2817" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+  <path d="M 285 555 L 395 555 L 410 580 L 270 580 Z" fill="#F5EDD8" stroke="#1F1508" stroke-width="4"/>
+
+  <rect x="325" y="500" width="30" height="55" rx="15" fill="#E8A04B" stroke="#1F1508" stroke-width="4"/>
+  <line x1="340" y1="510" x2="340" y2="545" stroke="#1F1508" stroke-width="2.5" opacity="0.6"/>
+  <circle cx="348" cy="528" r="2" fill="#1F1508"/>
+
+  <path d="M 285 500 L 395 500 L 395 555 L 285 555 Z" fill="#F5EDD8" stroke="#1F1508" stroke-width="4"/>
+  <path d="M 285 500 L 395 500 L 395 518 L 285 518 Z" fill="#E85A4F" stroke="#1F1508" stroke-width="4"/>
+  <path d="M 285 537 L 395 537 L 395 555 L 285 555 Z" fill="#E85A4F" stroke="#1F1508" stroke-width="4"/>
+
+  <rect x="300" y="520" width="12" height="16" rx="2" fill="#2C3E6B" stroke="#1F1508" stroke-width="3"/>
+  <rect x="368" y="520" width="12" height="16" rx="2" fill="#2C3E6B" stroke="#1F1508" stroke-width="3"/>
+
+  <path d="M 290 445 L 390 445 L 395 500 L 285 500 Z" fill="#F5EDD8" stroke="#1F1508" stroke-width="4"/>
+  <path d="M 290 445 L 390 445 L 393 470 L 287 470 Z" fill="#E85A4F" stroke="#1F1508" stroke-width="4"/>
+
+  <rect x="325" y="475" width="14" height="18" rx="2" fill="#2C3E6B" stroke="#1F1508" stroke-width="3"/>
+
+  <path d="M 270 425 L 410 425 L 410 450 L 270 450 Z" fill="#F5EDD8" stroke="#1F1508" stroke-width="4"/>
+  <circle cx="295" cy="437" r="4" fill="#1F1508"/>
+  <circle cx="340" cy="437" r="4" fill="#1F1508"/>
+  <circle cx="385" cy="437" r="4" fill="#1F1508"/>
+
+  <rect x="278" y="418" width="124" height="8" fill="#1F1508"/>
+
+  <path d="M 295 390 L 385 390 L 390 418 L 290 418 Z" fill="#F5EDD8" stroke="#1F1508" stroke-width="4"/>
+  <circle cx="340" cy="404" r="12" fill="#E85A4F" stroke="#1F1508" stroke-width="3"/>
+  <circle cx="340" cy="404" r="6" fill="#FFF8E0"/>
+  <circle cx="342" cy="402" r="2" fill="#FFF8E0"/>
+
+  <rect x="288" y="384" width="104" height="8" fill="#1F1508"/>
+
+  <path d="M 310 382 L 370 382 L 370 390 L 310 390 Z" fill="#F5EDD8" stroke="#1F1508" stroke-width="4"/>
+
+  <path d="M 300 380 L 380 380 L 340 320 Z" fill="#E85A4F" stroke="#1F1508" stroke-width="4"/>
+  <path d="M 315 355 L 365 355" stroke="#1F1508" stroke-width="2" opacity="0.3"/>
+
+  <circle cx="340" cy="315" r="5" fill="#1F1508"/>
+  <line x1="340" y1="310" x2="340" y2="290" stroke="#1F1508" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 335 293 L 345 293 L 343 285 L 337 285 Z" fill="#E85A4F" stroke="#1F1508" stroke-width="2"/>
+</svg>

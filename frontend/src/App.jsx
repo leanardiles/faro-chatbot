@@ -46,8 +46,12 @@ function App() {
     <main className={`app ${conversation.length === 0 ? 'app--empty' : ''}`}>
       {conversation.length === 0 && (
         <header className="welcome">
-          <h1>Faro</h1>
-          <p>Ready to enlighten.</p>
+          <img src="/lighthouse_v1.svg" alt="" className="lighthouse" />
+          <div className="welcome-text">
+            <h1>Faro</h1>
+            <p>Ready to enlighten.</p>
+            <div className="welcome-spacer" aria-hidden="true" />
+          </div>
         </header>
       )}
 
@@ -61,15 +65,21 @@ function App() {
       </section>
 
       <div className="input-area">
-        <textarea
-          className="input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Ask Faro a question..."
-          rows={3}
-          disabled={isLoading}
-        />
+        {conversation.length > 0 && (
+          <img src="/lighthouse_v1.svg" alt="" className="lighthouse-avatar" />
+        )}
+        <div className="input-wrapper">
+          <textarea
+            className="input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Ask Faro a question..."
+            rows={3}
+            disabled={isLoading}
+          />
+          <span className="model-badge">GPT-3.5 Turbo</span>
+        </div>
         <button
           className="send-button"
           onClick={handleSend}
