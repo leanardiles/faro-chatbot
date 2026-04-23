@@ -72,8 +72,8 @@ faro-chatbot/
 - [x] Backend scaffolding (FastAPI + venv + .gitignore)
 - [x] Environment variable management (python-dotenv)
 - [x] Azure OpenAI client initialization
-- [ ] `/query` endpoint with Azure OpenAI integration
-- [ ] Empty-input validation
+- [x] `/query` endpoint with Azure OpenAI integration
+- [x] Empty-input validation
 - [ ] React frontend scaffolding
 - [ ] Input/response UI
 - [ ] Backend-frontend integration (CORS, API calls)
