@@ -10,7 +10,7 @@ Faro takes its name from the Spanish and Italian word for *lighthouse* — desce
 
 ## Tech Stack
 
-- **Frontend:** React (via Vite)
+- **Frontend:** React (via Vite), vanilla CSS with CSS variables
 - **Backend:** Python + FastAPI
 - **LLM:** Azure OpenAI (GPT-3.5 Turbo)
 - **Config:** python-dotenv for environment variables
@@ -96,7 +96,7 @@ With both servers running (backend on port 8000, frontend on port 5173), open `h
 
 ## How it works
 
-1. The user types a question in the React frontend and submits it.
+1. The user types a question in the React frontend and submits it (via Enter or the Send button).
 2. The frontend sends a `POST` request to the FastAPI backend's `/query` endpoint with the question as JSON.
 3. The backend validates the input (rejecting empty or whitespace-only messages) and forwards it to Azure OpenAI, along with a system prompt that defines Faro's lighthouse-guide persona.
 4. Azure OpenAI returns a response, which the backend passes back to the frontend.
@@ -104,19 +104,36 @@ With both servers running (backend on port 8000, frontend on port 5173), open `h
 
 The backend uses CORS middleware to allow the frontend's development origin (`http://localhost:5173`) to make cross-origin requests.
 
+## User interface
+
+Faro's UI has two states that respond to whether a conversation is underway:
+
+- **Empty state:** a centered welcome with an illustrated lighthouse, the name "Faro," and the tagline *"Ready to enlighten."* The input textarea sits directly below.
+- **Conversation state:** the welcome is replaced by the scrolling message history. A small lighthouse avatar accompanies the input at the bottom of the screen, indicating Faro's continued presence.
+
+Supporting details:
+- The input supports `Enter` to send and `Shift+Enter` for multi-line questions.
+- The model name ("GPT-3.5 Turbo") is displayed subtly in the bottom-right corner of the input area.
+- User messages appear in soft-blue rounded bubbles, right-aligned; Faro's responses appear as plain text below, left-aligned.
+- The conversation scrolls internally while the input remains fixed at the bottom, so the page viewport never scrolls.
+
 ## Design
 
-Faro's visual identity borrows from Sherpa Digital's own brand palette to match the reviewer's context:
+Faro's visual identity borrows from [Sherpa Digital's](https://www.sherpadigital.nl/) own brand palette:
 
 - **Background:** `#FFFFFF`
 - **Primary action (Send):** `#38FC9E` (Sherpa green)
-- **Secondary action (Clear, links):** `#0031FF` (Sherpa blue)
+- **Secondary action / links / heading:** `#0031FF` (Sherpa blue)
 - **Text:** `#111928`
 - **Typeface:** Inter (loaded from Google Fonts)
 
+The lighthouse illustration is a custom SVG in a warm, storybook-inspired palette that complements — rather than duplicates — the Sherpa brand colors.
+
 ## Roadmap
 
-- [x] Backend scaffolding (FastAPI + venv + .gitignore)
+### Assignment scope
+
+- [x] Backend scaffolding (FastAPI + venv + `.gitignore`)
 - [x] Environment variable management (python-dotenv)
 - [x] Azure OpenAI client initialization
 - [x] `/query` endpoint with Azure OpenAI integration
@@ -126,15 +143,22 @@ Faro's visual identity borrows from Sherpa Digital's own brand palette to match 
 - [x] React frontend scaffolding
 - [x] Input/response UI
 - [x] Backend-frontend integration
-- [ ] Visual styling (centered empty state, conversation layout, message bubbles)
-- [ ] "Thinking…" loading state *(bonus)*
-- [ ] Clear conversation button *(bonus)*
+- [x] Visual styling (palette, typography, message bubbles, state-based layout)
+- [x] Lighthouse illustration in welcome and conversation states
+- [x] Model badge and viewport-bound conversation scrolling
+- [x] "Thinking…" loading state *(bonus)*
+- [x] Clear conversation button *(bonus)*
 - [ ] Demo screenshots / video
-- [ ] Deployment *(optional)*
+- [ ] Final submission polish (README finalization + zip)
+
+### Future enhancements (beyond the current scope)
+
+- [ ] **Conversation memory**: pass prior messages as context so Faro can reference earlier parts of the conversation (currently single-turn).
+- [ ] **Dark mode**: a UI toggle for light/dark themes, persisted across sessions.
 
 ## Notes
 
-Faro currently operates in **single-turn mode**: each question is sent independently to the backend with no conversation memory. The frontend displays the full exchange history for the user's reference, but the model does not see previous messages when responding. Conversation memory is a potential future enhancement.
+Faro currently operates in **single-turn mode**: each question is sent independently to the backend with no conversation memory. The frontend displays the full exchange history for the user's reference, but the model does not see previous messages when generating responses. See the [Roadmap](#roadmap) for planned enhancements including conversation memory and dark mode.
 
 ## License
 
