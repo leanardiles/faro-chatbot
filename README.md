@@ -148,17 +148,22 @@ The lighthouse illustration is a custom SVG in a warm, storybook-inspired palett
 - [x] Model badge and viewport-bound conversation scrolling
 - [x] "Thinking…" loading state *(bonus)*
 - [x] Clear conversation button *(bonus)*
+- [x] Dark mode toggle with crossfading "lit" lighthouse *(beyond scope)*
 - [ ] Demo screenshots / video
 - [ ] Final submission polish (README finalization + zip)
 
-### Future enhancements (beyond the current scope)
+### Future enhancements
 
 - [ ] **Conversation memory**: pass prior messages as context so Faro can reference earlier parts of the conversation (currently single-turn).
-- [ ] **Dark mode**: a UI toggle for light/dark themes, persisted across sessions.
+- [ ] **Clear chat button placement**: iterate on the button's position for better UX discoverability.
 
 ## Notes
 
-Faro currently operates in **single-turn mode**: each question is sent independently to the backend with no conversation memory. The frontend displays the full exchange history for the user's reference, but the model does not see previous messages when generating responses. See the [Roadmap](#roadmap) for planned enhancements including conversation memory and dark mode.
+Faro currently operates in **single-turn mode**: each question is sent independently to the backend with no conversation memory. The frontend displays the full exchange history for the user's reference, but the model does not see previous messages when generating responses. See the [Roadmap](#roadmap) for planned enhancements including conversation memory.
+
+### Dark mode
+
+Faro supports light and dark themes, toggled from the top-left corner of the app. When dark mode is active, the lighthouse illustration "lights up" — a warm golden glow crossfades in around the lantern with a brief delay, suggesting the lamp has just turned on. Theme preference is tracked in React state for the current session.
 
 ## License
 
