@@ -12,6 +12,7 @@ function App() {
 
     setIsLoading(true);
     setInput('');
+    setConversation((prev) => [...prev, { question, answer: null }]);
 
     try {
       const response = await fetch('http://localhost:8000/query', {
@@ -21,15 +22,20 @@ function App() {
       });
 
       const data = await response.json();
-      setConversation((prev) => [
-        ...prev,
-        { question, answer: data.response },
-      ]);
+      setConversation((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = { question, answer: data.response };
+        return updated;
+      });
     } catch (error) {
-      setConversation((prev) => [
-        ...prev,
-        { question, answer: 'Sorry, something went wrong reaching the server.' },
-      ]);
+      setConversation((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = {
+          question,
+          answer: 'Sorry, something went wrong reaching the server.',
+        };
+        return updated;
+      });
     } finally {
       setIsLoading(false);
     }
@@ -49,44 +55,63 @@ function App() {
           <img src="/lighthouse_v1.svg" alt="" className="lighthouse" />
           <div className="welcome-text">
             <h1>Faro</h1>
-            <p>Ready to enlighten.</p>
+            <p>Ready to enlighten</p>
             <div className="welcome-spacer" aria-hidden="true" />
           </div>
         </header>
       )}
 
       <section className="conversation">
-        {conversation.map((exchange, index) => (
-          <div key={index} className="exchange">
-            <div className="user-message">{exchange.question}</div>
-            <div className="bot-message">{exchange.answer}</div>
-          </div>
-        ))}
-      </section>
+          {conversation.map((exchange, index) => (
+            <div key={index} className="exchange">
+              <div className="user-message">{exchange.question}</div>
+              {exchange.answer === null ? (
+                <div className="thinking-indicator">
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                </div>
+              ) : (
+                <div className="bot-message">{exchange.answer}</div>
+              )}
+            </div>
+          ))}
+        </section>
 
-      <div className="input-area">
+      <div className="input-outer">
         {conversation.length > 0 && (
           <img src="/lighthouse_v1.svg" alt="" className="lighthouse-avatar" />
         )}
-        <div className="input-wrapper">
-          <textarea
-            className="input"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Ask Faro a question..."
-            rows={3}
-            disabled={isLoading}
-          />
-          <span className="model-badge">GPT-3.5 Turbo</span>
+        <div className="input-area">
+          <div className="input-wrapper">
+            <textarea
+              className="input"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Ask Faro a question..."
+              rows={3}
+              disabled={isLoading}
+            />
+            <span className="model-badge">GPT-3.5 Turbo</span>
+          </div>
+          <button
+            className="send-button"
+            onClick={handleSend}
+            disabled={isLoading || !input.trim()}
+          >
+            Send
+          </button>
         </div>
-        <button
-          className="send-button"
-          onClick={handleSend}
-          disabled={isLoading || !input.trim()}
-        >
-          Send
-        </button>
+        {conversation.length > 0 && (
+          <button
+            className="clear-button"
+            onClick={() => setConversation([])}
+            disabled={isLoading}
+          >
+            Clear chat
+          </button>
+        )}
       </div>
     </main>
   );
