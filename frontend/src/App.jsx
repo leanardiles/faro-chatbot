@@ -43,11 +43,13 @@ function App() {
   };
 
   return (
-    <main className="app">
-      <header className="welcome">
-        <h1>Faro</h1>
-        <p>Ready to enlighten.</p>
-      </header>
+    <main className={`app ${conversation.length === 0 ? 'app--empty' : ''}`}>
+      {conversation.length === 0 && (
+        <header className="welcome">
+          <h1>Faro</h1>
+          <p>Ready to enlighten.</p>
+        </header>
+      )}
 
       <section className="conversation">
         {conversation.map((exchange, index) => (
