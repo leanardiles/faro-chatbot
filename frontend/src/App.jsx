@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
   const [input, setInput] = useState('');
   const [conversation, setConversation] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
 
   const handleSend = async () => {
     const question = input.trim();
@@ -50,13 +59,29 @@ function App() {
 
   return (
     <main className={`app ${conversation.length === 0 ? 'app--empty' : ''}`}>
+      <button
+        className="theme-toggle"
+        onClick={() => setIsDarkMode(!isDarkMode)}
+        aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        <span className="theme-toggle-circle" aria-hidden="true"></span>
+        <span className="theme-toggle-label">
+          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        </span>
+      </button>
       {conversation.length === 0 && (
         <header className="welcome">
-          <img src="/lighthouse_v1.svg" alt="" className="lighthouse" />
+          <div className="lighthouse-stack">
+            <img src="/lighthouse_v1.svg" alt="" className="lighthouse-base" />
+            <img
+              src="/lighthouse_v1_lit.svg"
+              alt=""
+              className={`lighthouse-lit ${isDarkMode ? 'lighthouse-lit--on' : ''}`}
+            />
+          </div>
           <div className="welcome-text">
             <h1>Faro</h1>
             <p>Ready to enlighten</p>
-            <div className="welcome-spacer" aria-hidden="true" />
           </div>
         </header>
       )}
@@ -80,7 +105,14 @@ function App() {
 
       <div className="input-outer">
         {conversation.length > 0 && (
-          <img src="/lighthouse_v1.svg" alt="" className="lighthouse-avatar" />
+          <div className="lighthouse-avatar-stack">
+            <img src="/lighthouse_v1.svg" alt="" className="lighthouse-avatar-base" />
+            <img
+              src="/lighthouse_v1_lit.svg"
+              alt=""
+              className={`lighthouse-avatar-lit ${isDarkMode ? 'lighthouse-avatar-lit--on' : ''}`}
+            />
+          </div>
         )}
         <div className="input-area">
           <div className="input-wrapper">
