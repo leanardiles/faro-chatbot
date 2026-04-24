@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 function App() {
@@ -6,6 +6,8 @@ function App() {
   const [conversation, setConversation] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const conversationEndRef = useRef(null);
+
 
   useEffect(() => {
     if (isDarkMode) {
@@ -14,6 +16,10 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
+
+  useEffect(() => {
+    conversationEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [conversation]);
 
   const handleSend = async () => {
     const question = input.trim();
@@ -97,7 +103,11 @@ function App() {
       )}
 
       <section className="conversation">
-          {conversation.map((exchange, index) => (
+        {conversation.map((exchange, index) => {
+          const isLast = index === conversation.length - 1;
+          const isComplete = exchange.answer !== null;
+          
+          return (
             <div key={index} className="exchange">
               <div className="user-message">{exchange.question}</div>
               {exchange.answer === null ? (
@@ -109,9 +119,20 @@ function App() {
               ) : (
                 <div className="bot-message">{exchange.answer}</div>
               )}
+              {isLast && isComplete && (
+                <button
+                  className="clear-link"
+                  onClick={() => setConversation([])}
+                  disabled={isLoading}
+                >
+                  Clear chat
+                </button>
+              )}
             </div>
-          ))}
-        </section>
+          );
+        })}
+        <div ref={conversationEndRef} />
+      </section>
 
       <div className="input-outer">
         {conversation.length > 0 && (
@@ -145,15 +166,6 @@ function App() {
             Send
           </button>
         </div>
-        {conversation.length > 0 && (
-          <button
-            className="clear-button"
-            onClick={() => setConversation([])}
-            disabled={isLoading}
-          >
-            Clear chat
-          </button>
-        )}
       </div>
     </main>
   );
