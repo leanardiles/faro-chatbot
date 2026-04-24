@@ -24,10 +24,20 @@ function App() {
     setConversation((prev) => [...prev, { question, answer: null }]);
 
     try {
+      // NEW
+      // Build the history from prior exchanges (last 10 pairs)
+      const history = conversation
+        .filter(ex => ex.answer !== null)  // only include completed exchanges
+        .slice(-10)                         // last 10 pairs
+        .flatMap(ex => [
+          { role: 'user', content: ex.question },
+          { role: 'assistant', content: ex.answer },
+        ]);
+
       const response = await fetch('http://localhost:8000/query', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({ question, history }),
       });
 
       const data = await response.json();
