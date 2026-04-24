@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
+import ReactMarkdown from 'react-markdown';
+
 
 function App() {
   const [input, setInput] = useState('');
@@ -117,7 +119,9 @@ function App() {
                   <span className="dot"></span>
                 </div>
               ) : (
-                <div className="bot-message">{exchange.answer}</div>
+                <div className="bot-message">
+                  <ReactMarkdown>{exchange.answer}</ReactMarkdown>
+                </div>
               )}
               {isLast && isComplete && (
                 <button
